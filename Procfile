@@ -1,3 +1,3 @@
-mongod: mongod --dbpath /mongodb/data --logpath /mongodb/log/mongo.log
+mongod: /usr/bin/mongod
 web: bundle exec rails server
 

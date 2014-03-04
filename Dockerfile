@@ -31,8 +31,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/mongodb.list
 RUN apt-get update
 RUN apt-get install -y --force-yes mongodb-10gen
-RUN mkdir -p /mongodb/data
-RUN mkdir /mongodb/log
+RUN mkdir -p /data/db
 
 # Install Bundler
 RUN bash -l -c 'gem install bundler'
@@ -43,7 +42,7 @@ RUN bash -l -c 'gem install foreman'
 # Install Errbit
 RUN git clone https://github.com/errbit/errbit.git ~/errbit
 RUN bash -l -c 'cd ~/errbit; bundle install'
-RUN bash -l -c 'mongod --dbpath /mongodb/data --logpath /mongodb/log/mongo.log &'
+RUN /usr/bin/mongod &
 RUN bash -l -c 'cd ~/errbit; rake errbit:bootstrap';
 
 # Copy Procfile
