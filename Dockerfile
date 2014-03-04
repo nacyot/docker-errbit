@@ -38,13 +38,14 @@ RUN mkdir /mongodb/log
 RUN bash -l -c 'gem install bundler'
 
 # Install and setting Foreman
-RUN gem install foreman
+RUN bash -l -c 'gem install foreman'
 ADD Procfile /errbit/Procfile
 
 # Install Errbit
 RUN git clone https://github.com/errbit/errbit.git ~/errbit
 RUN bash -l -c 'cd ~/errbit; bundle install'
-RUN bash -l -c 'mongod --dbpath /mongodb/data --logpath /mongodb/log/mongo.log &'; bash -l -c 'cd ~/errbit; rake errbit:bootstrap';
+RUN bash -l -c 'mongod --dbpath /mongodb/data --logpath /mongodb/log/mongo.log &'
+RUN bash -l -c 'cd ~/errbit; rake errbit:bootstrap';
 
 # Expose rails server port
 EXPOSE 3000
