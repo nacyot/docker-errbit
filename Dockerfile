@@ -49,4 +49,4 @@ RUN bash -l -c 'cd ~/errbit; rake errbit:bootstrap';
 
 # Expose rails server port
 EXPOSE 3000
-CMD foreman start -f /errbit/Procfile
+CMD bash -l -c 'foreman start -f /errbit/Procfile'
